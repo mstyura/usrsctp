@@ -109,7 +109,11 @@ handle_events(int sock, struct socket* s, void* sconn_addr)
 		tv.tv_usec = (wait_time % 1000) * 1000;
 
 		FD_ZERO(&rfds);
+#if (_WIN32)
+		FD_SET((SOCKET)sock, &rfds);
+#else
 		FD_SET(sock, &rfds);
+#endif
 
 		select(sock + 1, &rfds, NULL, NULL, &tv);
 
