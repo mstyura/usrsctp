@@ -101,6 +101,9 @@ struct sctp_ifn {
 						 */
 #define SCTP_ADDR_DEFER_USE     0x00000004	/* Hold off using this one */
 #define SCTP_ADDR_IFA_UNUSEABLE 0x00000008
+#ifndef INVALID_SOCKET
+#define INVALID_SOCKET -1
+#endif
 
 struct sctp_ifa {
 	LIST_ENTRY(sctp_ifa) next_ifa;
