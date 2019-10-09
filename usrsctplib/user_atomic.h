@@ -77,11 +77,8 @@
 	} \
 }
 #endif
-#if defined(__Userspace_os_Windows)
-static void atomic_init(void) {} /* empty when we are not using atomic_mtx */
-#else
+
 static inline void atomic_init(void) {} /* empty when we are not using atomic_mtx */
-#endif
 
 #else
 /* Using gcc built-in functions for atomic memory operations
