@@ -179,7 +179,7 @@ on_socket_readable(struct socket* s) {
 		if (flags & MSG_NOTIFICATION) {
 			printf("Notification of length %d received.\n", (int)retval);
 		} else {
-			printf("Msg of length %d received via %p:%u on stream %d with SSN %u and TSN %u, PPID %d, context %u.\n",
+			printf("Msg of length %d received via %p:%u on stream %d with SSN %u and TSN %u, PPID %lu, context %u.\n",
 			       (int)retval,
 			       addr.sconn.sconn_addr,
 			       ntohs(addr.sconn.sconn_port),

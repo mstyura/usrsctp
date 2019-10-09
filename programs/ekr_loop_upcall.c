@@ -164,7 +164,7 @@ handle_upcall(struct socket *sock, void *data, int flgs)
 			if (flags & MSG_NOTIFICATION) {
 				printf("Notification of length %d received.\n", (int)n);
 			} else {
-				printf("Message of length %d received via %p:%u on stream %u with SSN %u and TSN %u, PPID %u, context %u, flags %x.\n",
+				printf("Message of length %d received via %p:%u on stream %u with SSN %u and TSN %u, PPID %lu, context %u, flags %x.\n",
 				       (int)n,
 				       addr.sconn.sconn_addr,
 				       ntohs(addr.sconn.sconn_port),
