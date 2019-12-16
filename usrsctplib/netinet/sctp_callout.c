@@ -159,7 +159,7 @@ sctp_os_timer_start(sctp_os_timer_t *c, uint32_t to_ticks, void (*ftn) (void *),
 }
 
 int
-sctp_os_timer_stop(sctp_os_timer_t *c)
+sctp_os_timer_stop(sctp_os_timer_t *c, int can_wait)
 {
 	int wakeup_cookie;
 
@@ -187,6 +187,16 @@ sctp_os_timer_stop(sctp_os_timer_t *c)
 
 			/* need to wait until the callout is finished */
 			sctp_os_timer_waiting = 1;
+
+			if (!can_wait) {
+				// Blocking wait is not allowed by caller, just marking timer 
+				// as cancelled.
+				// WARN: This implementation is likely to be not fully correct
+				// sctp_os_timer_waiting - is an indicator that current timer is 
+				// cancelled.
+				return (0);
+			}
+
 			wakeup_cookie = ++sctp_os_timer_wait_ctr;
 			SCTP_TIMERQ_UNLOCK();
 			SCTP_TIMERWAIT_LOCK();

@@ -102,14 +102,14 @@ typedef struct sctp_callout sctp_os_timer_t;
 
 void sctp_os_timer_init(sctp_os_timer_t *tmr);
 void sctp_os_timer_start(sctp_os_timer_t *, uint32_t, void (*)(void *), void *);
-int sctp_os_timer_stop(sctp_os_timer_t *);
+int sctp_os_timer_stop(sctp_os_timer_t *, int);
 void sctp_handle_tick(uint32_t);
 
 #define SCTP_OS_TIMER_INIT	sctp_os_timer_init
 #define SCTP_OS_TIMER_START	sctp_os_timer_start
-#define SCTP_OS_TIMER_STOP	sctp_os_timer_stop
+#define SCTP_OS_TIMER_STOP(tmr)	sctp_os_timer_stop((tmr), 0)
 /* MT FIXME: Is the following correct? */
-#define SCTP_OS_TIMER_STOP_DRAIN SCTP_OS_TIMER_STOP
+#define SCTP_OS_TIMER_STOP_DRAIN(tmr) sctp_os_timer_stop((tmr), 1)
 #define	SCTP_OS_TIMER_PENDING(tmr) ((tmr)->c_flags & SCTP_CALLOUT_PENDING)
 #define	SCTP_OS_TIMER_ACTIVE(tmr) ((tmr)->c_flags & SCTP_CALLOUT_ACTIVE)
 #define	SCTP_OS_TIMER_DEACTIVATE(tmr) ((tmr)->c_flags &= ~SCTP_CALLOUT_ACTIVE)
