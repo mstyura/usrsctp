@@ -194,6 +194,7 @@ sctp_os_timer_stop(sctp_os_timer_t *c, int can_wait)
 				// WARN: This implementation is likely to be not fully correct
 				// sctp_os_timer_waiting - is an indicator that current timer is 
 				// cancelled.
+				SCTP_TIMERQ_UNLOCK();
 				return (0);
 			}
 
